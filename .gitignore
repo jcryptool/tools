@@ -10,3 +10,7 @@ Thumbs.db
 *.exe
 *.zip
 *.tar.gz
+
+org.jcryptool.tools.algorithmXmlParser/.classpath
+
+org.jcryptool.tools.algorithmXmlParser/.project
