@@ -1,12 +1,16 @@
 *.class
+*/bin*
+*/target*
+*/.settings*
+.DS_Store
+workspace
+build.xml
+javaCompiler...args
+Thumbs.db
+*.exe
+*.zip
+*.tar.gz
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+org.jcryptool.tools.algorithmXmlParser/.classpath
 
-# Package Files #
-*.jar
-*.war
-*.ear
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+org.jcryptool.tools.algorithmXmlParser/.project
