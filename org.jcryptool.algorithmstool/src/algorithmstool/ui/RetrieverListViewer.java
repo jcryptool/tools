@@ -9,6 +9,11 @@ import java.util.Map;
 import java.util.Observer;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.dnd.Clipboard;
+import org.eclipse.swt.dnd.TextTransfer;
+import org.eclipse.swt.dnd.Transfer;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -29,7 +34,7 @@ import algorithmstool.model.retrievers.Retriever;
 public class RetrieverListViewer extends Composite {
 
 
-	public static final String SEP = " > ";
+	public static final String SEP = " > "; //$NON-NLS-1$
 	private List<Retriever> retriever;
 	private Table table;
 	private TableColumn tcName;
@@ -194,7 +199,7 @@ public class RetrieverListViewer extends Composite {
 		
 		
 		tcName = new TableColumn(table, SWT.NONE);
-		tcName.setText("Name");
+		tcName.setText(Messages.RetrieverListViewer_1);
 		tcName.setWidth(250);
 		tcName.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -209,7 +214,7 @@ public class RetrieverListViewer extends Composite {
 		});
 		
 		tcPerspective = new TableColumn(table, SWT.NONE);
-		tcPerspective.setText("Perspektive");
+		tcPerspective.setText(Messages.RetrieverListViewer_2);
 		tcPerspective.setWidth(80);
 		tcPerspective.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -224,7 +229,7 @@ public class RetrieverListViewer extends Composite {
 		});
 		
 		tcPath = new TableColumn(table, SWT.NONE);
-		tcPath.setText("Path");
+		tcPath.setText(Messages.RetrieverListViewer_3);
 		tcPath.setWidth(600);
 		tcPath.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -254,6 +259,29 @@ public class RetrieverListViewer extends Composite {
 			}
 		});
 		
+		table.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(((e.stateMask & SWT.CTRL) == SWT.CTRL) && (e.keyCode == 'c'))
+                {
+                    int[] idcs = table.getSelectionIndices();
+					List<IAlgorithmDescr> selectedAlgos = new LinkedList<IAlgorithmDescr>();
+					for(int idx: idcs) {
+						selectedAlgos.add(sortedAlgos.get(idx));
+					}
+					String defaultToClipboard = ExportWizard.exportLastDefault(selectedAlgos);
+					copyToClipboard(defaultToClipboard);
+                }
+			}
+		});
+		
+	}
+
+	protected void copyToClipboard(String defaultToClipboard) {
+		final Clipboard cb = new Clipboard(getDisplay());
+		TextTransfer textTransfer = TextTransfer.getInstance();
+        cb.setContents(new Object[] { defaultToClipboard },
+            new Transfer[] { textTransfer });
 	}
 
 	public List<IAlgorithmDescr> getSortedAlgos() {

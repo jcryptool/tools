@@ -46,7 +46,7 @@ public class RetrieverViewer extends Composite {
 		if(displayLink) {
 			Link link = new Link(this, SWT.NONE);
 			link.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
-			link.setText("<a>(konfigurieren)</a>");
+			link.setText(Messages.RetrieverViewer_0);
 			link.setCursor(new Cursor(getDisplay(), SWT.CURSOR_HAND));
 			link.addSelectionListener(new SelectionAdapter() {
 				@Override

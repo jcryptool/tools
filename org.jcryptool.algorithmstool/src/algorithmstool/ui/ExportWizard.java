@@ -17,26 +17,31 @@ import algorithmstool.model.IAlgorithmDescr;
 
 public class ExportWizard extends Wizard {
 
-	private String colSep;
-	private String pathSep;
+	public static String lastPathSep;
+	public static String lastColSep;
+	
+	private String initPathSep;
+	private String initColSep;
 	private List<? extends IAlgorithmDescr> algos;
 	private ExportWizardPage page;
 
 	public ExportWizard(String pathSep, String colSep, List<? extends IAlgorithmDescr> algos) {
-		this.pathSep = pathSep;
-		this.colSep = colSep;
+		this.initPathSep = pathSep;
+		this.initColSep = colSep;
 		this.algos = algos;
-		setWindowTitle("Export");
+		setWindowTitle(Messages.ExportWizard_0);
 	}
 
 	@Override
 	public void addPages() {
-		this.page = new ExportWizardPage(pathSep, colSep);
+		this.page = new ExportWizardPage(initPathSep, initColSep);
 		this.addPage(this.page);
 	}
 
 	@Override
 	public boolean performFinish() {
+		ExportWizard.lastPathSep = this.page.getPathSep();
+		ExportWizard.lastColSep = this.page.getColSep();
 		writeToEditor(algos, this.page.getPathSep(), this.page.getColSep());
 		return true;
 	}
@@ -46,7 +51,7 @@ public class ExportWizard extends Wizard {
 		String text = formatTable(algos, pathSep, colSep); 
 		EditorsManager manager = EditorsManager.getInstance();
 		try {
-            InputStream cis = new ByteArrayInputStream(text.getBytes("UTF-8"));
+            InputStream cis = new ByteArrayInputStream(text.getBytes("UTF-8")); //$NON-NLS-1$
             IEditorInput output = AbstractEditorService.createOutputFile(cis);
             EditorsManager.getInstance().openNewTextEditor(output);
         } catch (UnsupportedEncodingException usEx) {
@@ -69,9 +74,13 @@ public class ExportWizard extends Wizard {
 			String path = AlgorithmDescr.makePathString(a.getPath(), pathSep);
 			sb.append(path);
 			
-			sb.append("\n");
+			sb.append("\n"); //$NON-NLS-1$
 		}
 		return sb.toString();
+	}
+
+	public static String exportLastDefault(List<IAlgorithmDescr> selectedAlgos) {
+		return formatTable(selectedAlgos, lastPathSep, lastColSep);
 	}
 
 }

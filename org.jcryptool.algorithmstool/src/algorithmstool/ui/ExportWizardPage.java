@@ -18,11 +18,11 @@ public class ExportWizardPage extends WizardPage {
 	 * Create the wizard.
 	 */
 	public ExportWizardPage(String pathSep, String colSep) {
-		super("Export Page");
+		super("Export Page"); //$NON-NLS-1$
 		this.colSep = colSep;
 		this.pathSep = pathSep;
-		setTitle("Export");
-		setDescription("Einige Optionen bevor die Liste in einen Editor geschrieben wird.\n(\\t wird als Tab übersetzt)");
+		setTitle(Messages.ExportWizardPage_1);
+		setDescription(Messages.ExportWizardPage_2);
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class ExportWizardPage extends WizardPage {
 		
 		Label lblPfadseparator = new Label(container, SWT.NONE);
 		lblPfadseparator.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblPfadseparator.setText("Pfad-Separator:");
+		lblPfadseparator.setText(Messages.ExportWizardPage_3);
 		
 		text_path = new Text(container, SWT.BORDER);
 		text_path.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
@@ -45,7 +45,7 @@ public class ExportWizardPage extends WizardPage {
 		
 		Label lblSeparatorZwischenDen = new Label(container, SWT.NONE);
 		lblSeparatorZwischenDen.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblSeparatorZwischenDen.setText("Separator zwischen den Spalten:");
+		lblSeparatorZwischenDen.setText(Messages.ExportWizardPage_4);
 		
 		text_col = new Text(container, SWT.BORDER);
 		text_col.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
@@ -53,11 +53,11 @@ public class ExportWizardPage extends WizardPage {
 	}
 
 	private static String replaceTabOut(String enteredText) {
-		return enteredText.replace("\\t", "\t");
+		return enteredText.replace("\\t", "\t"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	private static String replaceTabIn(String separatorToDisplay) {
-		return separatorToDisplay.replace("\t", "\\t");
+		return separatorToDisplay.replace("\t", "\\t"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	public String getPathSep() {

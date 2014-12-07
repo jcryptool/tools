@@ -13,7 +13,7 @@ public class PathWizard extends Wizard {
 
 	public PathWizard(String topicOfPath, List<String> initialPath) {
 		this.topicOfPath = topicOfPath;
-		setWindowTitle("Pfadeingabe");
+		setWindowTitle(Messages.PathWizard_0);
 		this.initialPath = initialPath;
 	}
 

@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Algorithmstool
+Bundle-Name: %Bundle-Name
 Bundle-SymbolicName: org.jcryptool.algorithmstool;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: algorithmstool.Activator

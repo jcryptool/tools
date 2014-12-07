@@ -15,7 +15,7 @@ import algorithmstool.model.AlgorithmDescr;
 
 public class PathPage extends WizardPage {
 
-	private static final String PAGENAME_DEFAULT = "path page";
+	private static final String PAGENAME_DEFAULT = "path page"; //$NON-NLS-1$
 	private Text text;
 	private List<String> initialPath;
 
@@ -24,8 +24,8 @@ public class PathPage extends WizardPage {
 	 */
 	public PathPage(String pathTopic, List<String> initialPath) {
 		super(PAGENAME_DEFAULT);
-		setTitle("Eingabe des Stammpfades für " + pathTopic);
-		setDescription("Bitte den Stammpfad für " + pathTopic + " eingeben, getrennt durch '>' ohne Leerzeichen.");
+		setTitle(Messages.PathPage_1 + pathTopic);
+		setDescription(Messages.PathPage_2 + pathTopic + Messages.PathPage_3);
 		this.initialPath = initialPath;
 	}
 
@@ -43,7 +43,7 @@ public class PathPage extends WizardPage {
 		
 		Label lblPfad = new Label(container, SWT.NONE);
 		lblPfad.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblPfad.setText("Pfad: ");
+		lblPfad.setText(Messages.PathPage_4);
 		
 		text = new Text(container, SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
@@ -51,12 +51,12 @@ public class PathPage extends WizardPage {
 	}
 	
 	private String gluePath(List<String> initialPath) {
-		return AlgorithmDescr.makePathString(initialPath, ">");
+		return AlgorithmDescr.makePathString(initialPath, ">"); //$NON-NLS-1$
 	}
 
 	public List<String> getPath() {
 		LinkedList<String> list = new LinkedList<String>();
-		String[] split = this.text.getText().trim().split(">");
+		String[] split = this.text.getText().trim().split(">"); //$NON-NLS-1$
 		for(String s: split) {
 			list.add(s);
 		}

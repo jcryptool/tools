@@ -49,6 +49,12 @@ public class MainComposite extends Composite {
 	private Composite fpComp;
 	private Group rVGroup;
 	private List<FlexiProviderRetriever> fpRetrievers;
+	private String defaultColSep = "\t";
+	private String defaultPathSep = " > ";
+	static{
+		ExportWizard.lastColSep = "\t";
+		ExportWizard.lastPathSep = " > ";
+	}
 	
 	/**
 	 * Create the composite.
@@ -66,36 +72,36 @@ public class MainComposite extends Composite {
 	private List<Retriever> makeDefaultRetrievers() {
 		this.retrievers = new LinkedList<Retriever>();
 		
-		String stubDescrDoc = "Dokumentenansicht > ";
-		final List<String> stubPathDoc = new LinkedList<String>(){{add("[D]");}};
+		String stubDescrDoc = Messages.MainComposite_0;
+		final List<String> stubPathDoc = new LinkedList<String>(){{add(Messages.MainComposite_1);}};
 		
 		String name;
 		LinkedList<String> basePath;
 		String descr;
 		String extPt;
 		
-		name = "Algorithmen";
+		name = Messages.MainComposite_2;
 		basePath = appendList(stubPathDoc, name);
-		descr = stubDescrDoc + "Algorithmen";
+		descr = stubDescrDoc + Messages.MainComposite_3;
 		retrDocViewAlgos = new DocViewCryptoRetriever(basePath, descr);
 		retrievers.add(retrDocViewAlgos);
 		
-		extPt = "org.jcryptool.core.operations.analysis";
-		name = "Analysen";
+		extPt = "org.jcryptool.core.operations.analysis"; //$NON-NLS-1$
+		name = Messages.MainComposite_5;
 		basePath = appendList(stubPathDoc, name);
 		descr = stubDescrDoc + name;
 		retrAnalysis = new DocViewRestRetriever(basePath, extPt, descr);
 		retrievers.add(retrAnalysis);
 		
-		extPt = "org.jcryptool.core.operations.visuals";
-		name = "Visualisierungen";
+		extPt = "org.jcryptool.core.operations.visuals"; //$NON-NLS-1$
+		name = Messages.MainComposite_7;
 		basePath = appendList(stubPathDoc, name);
 		descr = stubDescrDoc + name;
 		retrVis = new DocViewRestRetriever(basePath, extPt, descr);
 		retrievers.add(retrVis);
 		
-		extPt = "org.jcryptool.core.operations.games";
-		name = "Spiele";
+		extPt = "org.jcryptool.core.operations.games"; //$NON-NLS-1$
+		name = Messages.MainComposite_9;
 		basePath = appendList(stubPathDoc, name);
 		descr = stubDescrDoc + name;
 		retrGames = new DocViewRestRetriever(basePath, extPt, descr);
@@ -115,8 +121,8 @@ public class MainComposite extends Composite {
 		List<String> basePath;
 		String descr;
 		
-		String stubDescrDoc = "FP > ";
-		final List<String> stubPathDoc = new LinkedList<String>(){{add("[A]");}};
+		String stubDescrDoc = "FP > "; //$NON-NLS-1$
+		final List<String> stubPathDoc = new LinkedList<String>(){{add("[A]");}}; //$NON-NLS-1$
 		
 		ITreeNode root = FlexiProviderAlgorithmsViewContentProvider._invisibleRoot;
 		for(Object n: root.getChildrenArray()) {
@@ -159,7 +165,7 @@ public class MainComposite extends Composite {
 		Group dispGroup = new Group(parent, SWT.NONE);
 		dispGroup.setLayout(new GridLayout());
 		dispGroup.setLayoutData(dispGroupLayoutData);
-		dispGroup.setText("Algorithmen");
+		dispGroup.setText(Messages.MainComposite_12);
 		
 		this.table = new RetrieverListViewer(dispGroup, SWT.NONE, Collections.EMPTY_LIST, retrieverCfgObserver);
 		this.table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -168,27 +174,27 @@ public class MainComposite extends Composite {
 		GridData lblCILLD = new GridData(SWT.FILL, SWT.CENTER, true, false);
 		lblCILLD.widthHint = 600;
 		lblClickInfo.setLayoutData(lblCILLD);
-		lblClickInfo.setText("Durch Doppelklick auf einen Eintrag der Tabelle wird der Optionsdialog zum zugehörigen Algorithmen-Knoten (s. links); aufgerufen. Darin kann der Stammpfad für alle Elemente dieses Knotens angepasst werden.");
+		lblClickInfo.setText(Messages.MainComposite_13);
 		
 		Label lblSortInfo = new Label(dispGroup, SWT.WRAP);
 		GridData lblSI = new GridData(SWT.FILL, SWT.CENTER, true, false);
 		lblSI.widthHint = 600;
 		lblSortInfo.setLayoutData(lblSI);
-		lblSortInfo.setText("Sortieren der Spalten ist möglich. STRG+Click auf die Spalten setzt die Sortierung wieder zurück.");
+		lblSortInfo.setText(Messages.MainComposite_14);
 	}
 
 	private void createRetrieversViewerGroup(Composite parent, GridData layoutData) {
 		rVGroup = new Group(parent, SWT.NONE);
 		rVGroup.setLayout(new GridLayout());
 		rVGroup.setLayoutData(layoutData);
-		rVGroup.setText("Algorithmen-Knoten");
+		rVGroup.setText(Messages.MainComposite_15);
 		
 		this.rV = new RetrieversViewer(rVGroup, SWT.None, this.retrievers, retrieverCfgObserver);
 		this.rV.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 		
 		Button exportBtn = new Button(rVGroup, SWT.PUSH);
 		exportBtn.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-		exportBtn.setText("Export des Tabelleninhalts...");
+		exportBtn.setText(Messages.MainComposite_16);
 		exportBtn.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -208,14 +214,14 @@ public class MainComposite extends Composite {
 		fpComp.setLayout(new GridLayout(2, false));
 		
 		Label l = new Label(fpComp, SWT.WRAP);
-		l.setText("Die Flexiprovider-Algorithmen konnten noch nicht geladen werden. Dazu muss zuerst einmal die Algorithmen/FP Perspektive geöffnet worden sein. Mit dem folgenden Button können Sie dann die FP-Algorithmen-Retriever laden.");
+		l.setText(Messages.MainComposite_17);
 		GridData lData = new GridData(SWT.FILL, SWT.CENTER, true, false);
 		lData.widthHint = 250;
 		l.setLayoutData(lData);
 		
 		Button b = new Button(fpComp, SWT.PUSH);
 		b.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false));
-		b.setText("Refresh");
+		b.setText(Messages.MainComposite_18);
 		b.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -243,15 +249,19 @@ public class MainComposite extends Composite {
 			layout(true);
 			this.renderDisplay();
 		} else {
-			MessageDialog.openInformation(getShell(), ":-/", "Der FlexiProvider- Algorithmenbaum konnte nicht gefunden werden. Die Algorithmen-View muss einmal geladen worden sein.");
+			MessageDialog.openInformation(getShell(), ":-/", Messages.MainComposite_20); //$NON-NLS-1$
 		}
 	}
 
 	protected void exportClicked() {
 		List<IAlgorithmDescr> algos = new LinkedList<IAlgorithmDescr>(this.table.getSortedAlgos());
-		ExportWizard wizard = new ExportWizard(" > ", "\t", algos);
+		ExportWizard wizard = new ExportWizard(defaultPathSep, defaultColSep, algos); //$NON-NLS-1$ //$NON-NLS-2$
 		WizardDialog dialog = new WizardDialog(getShell(), wizard);
 		int result = dialog.open();
+		if(result == WizardDialog.OK) {
+			this.defaultPathSep = ExportWizard.lastPathSep;
+			this.defaultColSep = ExportWizard.lastColSep;
+		}
 	}
 
 	protected void renderDisplay() {

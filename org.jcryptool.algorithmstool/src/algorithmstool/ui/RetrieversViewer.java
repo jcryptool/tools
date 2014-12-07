@@ -80,7 +80,7 @@ public class RetrieversViewer extends Composite {
 		List<Boolean> data = this.getBtnData();
 		int pos = this.getRetrievers().indexOf(retriever);
 		if(pos<0) {
-			LogUtil.logError(Activator.PLUGIN_ID, "retriever object not found in retrieverViewer");
+			LogUtil.logError(Activator.PLUGIN_ID, "retriever object not found in retrieverViewer"); //$NON-NLS-1$
 			return false;
 		} else {
 			return data.get(pos);
