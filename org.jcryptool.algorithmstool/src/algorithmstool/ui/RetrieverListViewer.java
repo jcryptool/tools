@@ -22,6 +22,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -56,6 +57,7 @@ public class RetrieverListViewer extends Composite {
 	Comparator<? super IAlgorithmDescr> sName;
 	Comparator<? super IAlgorithmDescr> sPerspective;
 	Comparator<? super IAlgorithmDescr> sPath;
+	private Label countLbl;
 	
 	public int getSortSign() {
 		return sortSign;
@@ -145,6 +147,9 @@ public class RetrieverListViewer extends Composite {
 			this.tiOrigins.put(ti, a);
 			this.tableItems.add(ti);
 		}
+		
+		countLbl.setText(Messages.RetrieverListViewer_0 + as.size());
+		tcPath.pack();
 	}
 
 	private String makePathString(IAlgorithmDescr a) {
@@ -190,12 +195,14 @@ public class RetrieverListViewer extends Composite {
 	private void makeUI() {
 		this.setLayout(new GridLayout(1, false));
 		
+		countLbl = new Label(this, SWT.NONE);
+		countLbl.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		
 		table = new Table(this, SWT.MULTI | SWT.H_SCROLL
 			      | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
 		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
-		
 		
 		
 		tcName = new TableColumn(table, SWT.NONE);

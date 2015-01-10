@@ -18,6 +18,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.ui.IPerspectiveDescriptor;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.WorkbenchException;
+import org.jcryptool.core.logging.utils.LogUtil;
 import org.jcryptool.crypto.flexiprovider.algorithms.ui.views.providers.FlexiProviderAlgorithmsViewContentProvider;
 import org.jcryptool.crypto.flexiprovider.ui.nodes.ITreeNode;
 
@@ -49,11 +56,11 @@ public class MainComposite extends Composite {
 	private Composite fpComp;
 	private Group rVGroup;
 	private List<FlexiProviderRetriever> fpRetrievers;
-	private String defaultColSep = "\t";
-	private String defaultPathSep = " > ";
+	private String defaultColSep = "\t"; //$NON-NLS-1$
+	private String defaultPathSep = " > "; //$NON-NLS-1$
 	static{
-		ExportWizard.lastColSep = "\t";
-		ExportWizard.lastPathSep = " > ";
+		ExportWizard.lastColSep = "\t"; //$NON-NLS-1$
+		ExportWizard.lastPathSep = " > "; //$NON-NLS-1$
 	}
 	
 	/**
@@ -107,7 +114,7 @@ public class MainComposite extends Composite {
 		retrGames = new DocViewRestRetriever(basePath, extPt, descr);
 		retrievers.add(retrGames);
 		
-		if(FlexiProviderRetriever.canInitialize()) {
+		if(true || FlexiProviderRetriever.canInitialize()) {
 			loadFPRetrievers();
 		}
 		
@@ -115,6 +122,8 @@ public class MainComposite extends Composite {
 	}
 
 	private void loadFPRetrievers() {
+		tryAutomaticFPLoad();
+		
 		this.fpRetrievers = new LinkedList<FlexiProviderRetriever>();
 		
 		String name;
@@ -134,6 +143,26 @@ public class MainComposite extends Composite {
 			FlexiProviderRetriever retr = new FlexiProviderRetriever(basePath, node, descr);
 			retrievers.add(retr);
 			fpRetrievers.add(retr);
+		}
+	}
+
+	private void tryAutomaticFPLoad() {
+		try 
+		{
+			IWorkbench wb = PlatformUI.getWorkbench();
+			IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
+			IWorkbenchPage page = win.getActivePage();
+			IPerspectiveDescriptor perspective = page.getPerspective();
+			
+			String currentId = perspective.getId();
+			String fpId = "org.jcryptool.crypto.flexiprovider.ui.perspective.FlexiProviderPerspective"; //$NON-NLS-1$
+			
+			PlatformUI.getWorkbench().showPerspective(fpId, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
+			PlatformUI.getWorkbench().showPerspective(currentId, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
+		} 
+		catch (WorkbenchException e) 
+		{
+		   LogUtil.logError(e);
 		}
 	}
 
@@ -192,6 +221,7 @@ public class MainComposite extends Composite {
 		this.rV = new RetrieversViewer(rVGroup, SWT.None, this.retrievers, retrieverCfgObserver);
 		this.rV.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 		
+		
 		Button exportBtn = new Button(rVGroup, SWT.PUSH);
 		exportBtn.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 		exportBtn.setText(Messages.MainComposite_16);
@@ -201,16 +231,20 @@ public class MainComposite extends Composite {
 				MainComposite.this.exportClicked();
 			}
 		});
-		
+
 		if(FlexiProviderRetriever.canInitialize()) {
-			//Do nothing, should be already loaded
+			
 		} else {
-			makeFPLoadArea(rVGroup);
+			Composite borderC = new Composite(rVGroup, SWT.BORDER);
+			borderC.setLayout(new GridLayout());
+			borderC.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+			
+			makeFPLoadArea(borderC);
 		}
 	}
 
-	private void makeFPLoadArea(Group rVGroup) {
-		fpComp = new Composite(rVGroup, SWT.NONE);
+	private void makeFPLoadArea(Composite borderC) {
+		fpComp = new Composite(borderC, SWT.NONE);
 		fpComp.setLayout(new GridLayout(2, false));
 		
 		Label l = new Label(fpComp, SWT.WRAP);
@@ -240,7 +274,7 @@ public class MainComposite extends Composite {
 	}
 	
 	protected void fpRefresh() {
-		if(FlexiProviderRetriever.canInitialize()) {
+		if(true || FlexiProviderRetriever.canInitialize()) {
 			loadFPRetrievers();
 			for(Control c: this.getChildren()) {
 				c.dispose();

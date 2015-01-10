@@ -20,14 +20,14 @@ public class DocViewCryptoRetriever extends BasePathRetriever {
 	
 	static {
 		DEFAULT_SUBCAT_NAMES = new HashMap<String, String>(){{
-			put("classic"	,	"Klassisch");
-			put("symmetric"	,	"Symmetrisch");
-			put("asymmetric",	"Asymmetrisch");
-			put("mac"		,	"MAC");
-			put("prng"		,	"Zufallszahlengenerator");
-			put("hash"		,	"Hash");
-			put("xml"		,	"XML Sicherheit");
-			put("signature"	,	"Signatur");
+			put("classic"	,	Messages.DocViewCryptoRetriever_1); //$NON-NLS-1$
+			put("symmetric"	,	Messages.DocViewCryptoRetriever_3); //$NON-NLS-1$
+			put(Messages.DocViewCryptoRetriever_4,	Messages.DocViewCryptoRetriever_5);
+			put("mac"		,	Messages.DocViewCryptoRetriever_7); //$NON-NLS-1$
+			put("prng"		,	"Zufallszahlengenerator"); //$NON-NLS-1$ //$NON-NLS-2$
+			put("hash"		,	Messages.DocViewCryptoRetriever_11); //$NON-NLS-1$
+			put("xml"		,	Messages.DocViewCryptoRetriever_13); //$NON-NLS-1$
+			put("signature"	,	Messages.DocViewCryptoRetriever_15); //$NON-NLS-1$
 		}};
 	}
 	

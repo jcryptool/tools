@@ -7,7 +7,7 @@ import org.eclipse.ui.part.ViewPart;
 import algorithmstool.ui.MainComposite;
 
 public class View extends ViewPart {
-	public static final String ID = "algorithmstool.view";
+	public static final String ID = "algorithmstool.view"; //$NON-NLS-1$
 	private MainComposite mainView;
 
 	/**

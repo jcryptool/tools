@@ -11,8 +11,8 @@ import algorithmstool.ui.PathWizard;
 
 public abstract class BasePathRetriever implements Retriever {
 
-	public static String PERSPECTIVE_DOC = "D";
-	public static String PERSPECTIVE_ALG = "A";
+	public static String PERSPECTIVE_DOC = "D"; //$NON-NLS-1$
+	public static String PERSPECTIVE_ALG = Messages.BasePathRetriever_0;
 	
 	private List<String> basePath;
 	private String perspective;

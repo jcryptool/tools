@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PartInitException;
@@ -43,6 +44,7 @@ public class ExportWizard extends Wizard {
 		ExportWizard.lastPathSep = this.page.getPathSep();
 		ExportWizard.lastColSep = this.page.getColSep();
 		writeToEditor(algos, this.page.getPathSep(), this.page.getColSep());
+		MessageDialog.openInformation(getShell(), Messages.ExportWizard_1, Messages.ExportWizard_2);
 		return true;
 	}
 

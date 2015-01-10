@@ -5,6 +5,8 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "algorithmstool.ui.messages"; //$NON-NLS-1$
 	public static String ExportWizard_0;
+	public static String ExportWizard_1;
+	public static String ExportWizard_2;
 	public static String ExportWizardPage_1;
 	public static String ExportWizardPage_2;
 	public static String ExportWizardPage_3;
@@ -29,6 +31,7 @@ public class Messages extends NLS {
 	public static String PathPage_3;
 	public static String PathPage_4;
 	public static String PathWizard_0;
+	public static String RetrieverListViewer_0;
 	public static String RetrieverListViewer_1;
 	public static String RetrieverListViewer_2;
 	public static String RetrieverListViewer_3;

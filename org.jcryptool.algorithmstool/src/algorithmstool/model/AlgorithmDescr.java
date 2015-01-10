@@ -47,8 +47,8 @@ public class AlgorithmDescr implements IAlgorithmDescr {
 	
 	@Override
 	public String toString() {
-		String mask = "'%s'\t%s\t%s";
-		return String.format(mask, getName(), getPerspective(), getPathString(" > "));
+		String mask = "'%s'\t%s\t%s"; //$NON-NLS-1$
+		return String.format(mask, getName(), getPerspective(), getPathString(" > ")); //$NON-NLS-1$
 	}
 	
 }
