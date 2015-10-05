@@ -51,7 +51,6 @@ public class MainComposite extends Composite {
 
     private RetrieverListViewer table;
 
-    private Button retryFP;
     private Composite fpComp;
     private Group rVGroup;
     private List<FlexiProviderRetriever> fpRetrievers;

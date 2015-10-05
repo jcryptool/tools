@@ -51,7 +51,6 @@ public class ExportWizard extends Wizard {
 	private static void writeToEditor(List<? extends IAlgorithmDescr> algos,
 			String pathSep, String colSep) {
 		String text = formatTable(algos, pathSep, colSep); 
-		EditorsManager manager = EditorsManager.getInstance();
 		try {
             InputStream cis = new ByteArrayInputStream(text.getBytes("UTF-8")); //$NON-NLS-1$
             IEditorInput output = AbstractEditorService.createOutputFile(cis);
