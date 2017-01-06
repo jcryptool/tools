@@ -10,3 +10,4 @@ JCrypTool downloads are available as [weekly builds](http://www.cryptool.org/en/
 General information on the CrypTool and JCrypTool projects is available in the [CrypTool](http://www.cryptool.org) portal.
 
 [![Gitter](http://img.shields.io/badge/gitter-join%20chat-1dce73.svg)](https://gitter.im/dschadow/jcryptool)
+[![License](https://img.shields.io/badge/License-EPL%201.0-red.svg)](https://opensource.org/licenses/EPL-1.0)
