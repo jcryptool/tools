@@ -3,7 +3,7 @@ JCrypTool Tools
 
 The **JCrypTool Tools** project contains tools and plug-ins for JCrypTool maintainers. You do not need these tools to develop a (crypto) plug-in for JCrypTool.
 
-Have a look at our [wiki](https://github.com/jcryptool/core/wiki) for more information on how to get you started as a JCrypTool developer. Feel free to ask any question you might have in our [developers group](http://groups.google.com/group/jcryptool-developers) or in our [gitter chat](https://gitter.im/dschadow/jcryptool).
+Have a look at our [wiki](https://github.com/jcryptool/core/wiki) for more information on how to get you started as a JCrypTool developer. Feel free to ask any question you might have in our [gitter chat](https://gitter.im/dschadow/jcryptool).
 
 JCrypTool downloads are available as [weekly builds](https://github.com/jcryptool/core/releases) (unstable, built automatically based on the **develop** branch) and as [release builds](https://www.cryptool.org/en/jct-downloads/jct-stable) (stable).
 
